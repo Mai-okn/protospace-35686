@@ -7,10 +7,6 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.new
   end
 
-  def show
-    @prototype = Prototype.find(params[:id])
-  end
-
   def create
     @prototype = Prototype.new(prototype_params)
     if @prototype.save
@@ -18,6 +14,23 @@ class PrototypesController < ApplicationController
     else
       render :new
       @prototype = Prototype.includes(:user)
+    end
+  end
+
+  def show
+    @prototype = Prototype.find(params[:id])
+  end
+
+  def edit
+    @prototype = Prototype.find(params[:id])
+  end
+
+  def update
+    @prototype = Prototype.find(params[:id])
+    if @prototype.update(prototype_params)
+      redirect_to prototype_path
+    else
+      render :edit
     end
   end
 
