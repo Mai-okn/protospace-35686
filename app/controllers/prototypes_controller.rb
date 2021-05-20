@@ -1,9 +1,13 @@
 class PrototypesController < ApplicationController
   def index
+    @prototypes = Prototype.includes(:user)
   end
 
   def new
     @prototype = Prototype.new
+  end
+
+  def show
   end
 
   def create
@@ -12,6 +16,7 @@ class PrototypesController < ApplicationController
       redirect_to root_path 
     else
       render :new
+      @prototype = Prototype.includes(:user)
     end
   end
 
